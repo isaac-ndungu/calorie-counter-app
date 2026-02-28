@@ -14,20 +14,21 @@ const btn = document.getElementById('btn');
 
 // update calorie counter
 function updateCaloriecounter(calories) {
-    const counterDiv = document.createElement('div');
-    counterDiv.textContent = parseInt(counterDiv.textContent) || 0 + calories;
-    totalCalorieCounter.appendChild(counterDiv);
+    let currentCalories = parseInt(totalCalorieCounter.textContent) || 0;
+    currentCalories += calories;
+    totalCalorieCounter.textContent = currentCalories;
 }
 // update daily item count
 function updateItemCount() {
 
-    const itemCountDiv = document.createElement('div');
-    itemCountDiv.textContent = parseInt(itemCountDiv.textContent) || 0 + 1;
-    dailyItemCount.appendChild(itemCountDiv);
+    let currentCount = parseInt(dailyItemCount.textContent) || 0;
+    currentCount++;
+    dailyItemCount.textContent = `${currentCount} items today`;
 
 }
 
-btn.addEventListener('click', () => {
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
     const foodItem = foodItemInput.value;
     const calorieCount = parseInt(calorieCountInput.value);
 

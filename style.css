@@ -1,0 +1,13 @@
+#totalCalorieCounter {
+    font-size: 4rem;
+    font-weight: 600;
+    color: white;
+    padding: 8px;
+}
+#dailyItemCount {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    opacity: 0.9;
+    padding: 0 8px;
+}
