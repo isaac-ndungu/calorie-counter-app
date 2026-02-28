@@ -18,11 +18,14 @@
 
         <div class="flex items-center">
             <i class="fa-brands fa-nutritionix fa-xl" style="color: rgb(255, 255, 255);"></i>
-            <h2 class="text-white text-2xl font-bold tracking-wide">Total Calories</h2>
+            <div class="flex justify-between items-center w-full">
+                <h2 class="text-white text-2xl font-bold tracking-wide">Total Calories</h2>
+                <i class="fa-solid fa-arrow-rotate-left fa-xl cursor-pointer" style="color: rgb(255, 255, 255);" title="Reset Daily Counter" id="resetIcon"></i>
+            </div>
         </div>
 
-        <div id="totalCalorieCounter" ></div>
-        <div id="dailyItemCount"></div>
+        <div id="totalCalorieCounter" >0</div>
+        <div id="dailyItemCount">0 items today</div>
         
     </div>
 

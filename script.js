@@ -6,9 +6,7 @@ const dailyItemCount = document.getElementById('dailyItemCount');
 const foodItemInput = document.getElementById('foodItemInput');
 const calorieCountInput = document.getElementById('calorieCountInput');
 const btn = document.getElementById('btn');
-
-
-
+const resetIcon = document.getElementById('resetIcon')
 
 // Receive user input and update the calorie counter and item count
 
@@ -27,6 +25,7 @@ function updateItemCount() {
 
 }
 
+// Onclick 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
     const foodItem = foodItemInput.value;
@@ -42,3 +41,20 @@ btn.addEventListener('click', (e) => {
     foodItemInput.value = '';
     calorieCountInput.value = '';
 });
+
+
+// Reset daily count
+function dailyReset(){
+    totalCalories = 0;
+    itemCount = 0;
+
+    totalCalorieCounter.textContent = totalCalories;
+    dailyItemCount.textContent = `${itemCount} items today`
+}
+
+resetIcon.addEventListener('click', () =>{
+    dailyReset();
+})
+
+
+//
