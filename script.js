@@ -19,29 +19,22 @@ displayFoodItems();
 // Receive user input and update the calorie counter and item count
 
 // update calorie counter
-function updateCaloriecounter(calories) {
-    let currentCalories = parseInt(totalCalorieCounter.textContent) || 0;
-    currentCalories += calories;
-    totalCalorieCounter.textContent = currentCalories;
-}
-// update daily item count
-function updateItemCount() {
+function updatecounters() {
+    const totalCalories = foodItems.reduce((total, item) => total + item.calorieCount, 0);
 
-    let currentCount = parseInt(dailyItemCount.textContent) || 0;
-    currentCount++;
-    dailyItemCount.textContent = `${currentCount} items today`;
+    const itemCount = foodItems.length;
 
+    totalCalorieCounter.textContent = totalCalories;
+    dailyItemCount.textContent = `${itemCount} items today`;
 }
 
-// Onclick 
+// Onclick - Add food Item 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
     const foodItem = foodItemInput.value;
     const calorieCount = parseInt(calorieCountInput.value);
 
     if (foodItem && !isNaN(calorieCount)) {
-        updateCaloriecounter(calorieCount);
-        updateItemCount();
         addFoodItem(foodItem, calorieCount);
         displayFoodItems();
         
@@ -59,11 +52,9 @@ btn.addEventListener('click', (e) => {
 
 // Reset daily count
 function dailyReset(){
-    let totalCalories = 0;
-    let itemCount = 0;
-
-    totalCalorieCounter.textContent = totalCalories;
-    dailyItemCount.textContent = `${itemCount} items today`
+    foodItems = [];
+    localStorage.removeItem("foodItems");
+    displayFoodItems();
 }
 
 resetIcon.addEventListener('click', () =>{
@@ -86,6 +77,7 @@ function displayFoodItems() {
     foodItems.forEach(item => {
         const listItem = document.createElement('li');
         listItem.className = "listItem";
+
         listItem.innerHTML = `
             <div> 
                 <h3 id="foodItem">${item.foodItem}</h3>
@@ -95,15 +87,20 @@ function displayFoodItems() {
         `;
         foodList.appendChild(listItem);
     });
+
+    updatecounters();
 }
 
 // Delete food item
 
 foodList.addEventListener('click', function(e) {
     if(e.target.classList.contains('deleteIcon')) {
-        const listItem = e.target.parentElement;
-        listItem.remove();
-        updateItemCount(-1);
+        const index = e.target.dataset.index;
+
+        foodItems.splice(index, 1);
+        localStorage.setItem("foodItems", JSON.stringify(foodItems));
+
+        displayFoodItems();
     }
         
 });
