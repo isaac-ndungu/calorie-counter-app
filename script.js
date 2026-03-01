@@ -37,12 +37,12 @@ btn.addEventListener('click', (e) => {
     if (foodItem && !isNaN(calorieCount)) {
         addFoodItem(foodItem, calorieCount);
         displayFoodItems();
-        
+
     } else {
         alert('Please enter valid food item and calorie count');
     }
 
-    
+
 
     foodItemInput.value = '';
     calorieCountInput.value = '';
@@ -51,20 +51,20 @@ btn.addEventListener('click', (e) => {
 
 
 // Reset daily count
-function dailyReset(){
+function dailyReset() {
     foodItems = [];
     localStorage.removeItem("foodItems");
     displayFoodItems();
 }
 
-resetIcon.addEventListener('click', () =>{
+resetIcon.addEventListener('click', () => {
     dailyReset();
 })
 
 
 // Add food
 function addFoodItem(name, calories) {
-    let newfoodItem = {foodItem: name, calorieCount: calories};
+    let newfoodItem = { foodItem: name, calorieCount: calories };
     foodItems.push(newfoodItem);
     localStorage.setItem("foodItems", JSON.stringify(foodItems));
 
@@ -74,6 +74,20 @@ function addFoodItem(name, calories) {
 // Display food items
 function displayFoodItems() {
     foodList.innerHTML = '';
+
+    // If there are no food items, display a message
+    if (foodItems.length === 0) {
+        foodList.innerHTML = `
+            <div class="text-center p-4 text-gray-500">
+                <h3 class="font-semibold text-xl" >No food items added yet.</h3>
+                <p>Start tracking by adding your food items above!</p>
+            </div>
+        `;
+
+        updatecounters();
+        return;
+    }
+
     foodItems.forEach(item => {
         const listItem = document.createElement('li');
         listItem.className = "listItem";
@@ -93,8 +107,8 @@ function displayFoodItems() {
 
 // Delete food item
 
-foodList.addEventListener('click', function(e) {
-    if(e.target.classList.contains('deleteIcon')) {
+foodList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('deleteIcon')) {
         const index = e.target.dataset.index;
 
         foodItems.splice(index, 1);
@@ -102,7 +116,7 @@ foodList.addEventListener('click', function(e) {
 
         displayFoodItems();
     }
-        
+
 });
 
 
