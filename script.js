@@ -8,6 +8,8 @@ const calorieCountInput = document.getElementById('calorieCountInput');
 const btn = document.getElementById('btn');
 const resetIcon = document.getElementById('resetIcon')
 const foodList = document.getElementById('foodList');
+const listItem = document.querySelectorAll('.listItem');
+const deletes = document.querySelectorAll('.deleteIcon');
 
 
 let foodItems = JSON.parse(localStorage.getItem("foodItems")) || [];
@@ -83,13 +85,28 @@ function displayFoodItems() {
     foodList.innerHTML = '';
     foodItems.forEach(item => {
         const listItem = document.createElement('li');
+        listItem.className = "listItem";
         listItem.innerHTML = `
             <div> 
                 <h3 id="foodItem">${item.foodItem}</h3>
                 <p id="calorieCount">${item.calorieCount} calories</p>
             </div>
-            <i class="fa-solid fa-trash-can" style="color: rgb(255, 0, 0);"></i>
+            <i class="deleteIcon fa-solid fa-trash-can cursor-pointer" style="color: rgb(255, 0, 0);"}"></i>
         `;
         foodList.appendChild(listItem);
     });
 }
+
+// Delete food item
+
+foodList.addEventListener('click', function(e) {
+    if(e.target.classList.contains('deleteIcon')) {
+        const listItem = e.target.parentElement;
+        listItem.remove();
+        updateItemCount(-1);
+    }
+        
+});
+
+
+

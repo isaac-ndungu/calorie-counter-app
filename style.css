@@ -11,3 +11,26 @@
     opacity: 0.9;
     padding: 0 8px;
 }
+
+#foodItem {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#calorieCount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #888;
+}
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: 1px solid #8e8a8a;
+}
